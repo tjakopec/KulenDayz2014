@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kulendayz 2014</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>Primjer</h1>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="large-12 columns" id="kontejner"> 	
+      </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function dohvati(){
+      	$.ajax({
+				type: "POST",
+				url: "realniPrimjerBaza.php",
+				success: function(vratioServer){
+					var osobe=$.parseJSON(vratioServer);
+					$("#kontejner").html("");
+						$.each(osobe,function(key,osoba){
+							$("#kontejner").append(
+								"<div class=\"large-4 columns end\">" + 
+									"<div class=\panel\">" + 
+										"<img src=\"data:image/png;base64, " + osoba.slika + "\" alt=\"slika\" />" + 
+										"<hr />" + osoba.ime + " " + osoba.prezime + "<br />" + osoba.datumRodenja + 
+									"</div>" + 
+								"</div>");});}});
+	  }
+      dohvati();
+    </script>
+  </body>
+</html>
+
+
